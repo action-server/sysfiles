@@ -1,0 +1,11 @@
+ACTION=="add|change", \
+SUBSYSTEM=="power_supply", \
+ATTR{online}=="1", \
+RUN+="/usr/bin/cpupower frequency-set --governor performance", \
+RUN+="/usr/bin/light -S 100"
+
+ACTION=="add|change", \
+SUBSYSTEM=="power_supply", \
+ATTR{online}=="0", \
+RUN+="/usr/bin/cpupower frequency-set --governor ondemand", \
+RUN+="/usr/bin/light -S 50"
