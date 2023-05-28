@@ -2,10 +2,11 @@
 Type = Package
 Operation = Install
 Operation = Upgrade
+Target = doas
 Target = sudo
 
 [Action]
 Description = Re-pointing /usr/bin/sudo symlink to doas...
 When = PostTransaction
 Exec = /usr/bin/ln -sfT doas /usr/bin/sudo
-Depends = sudo
+Depends = doas

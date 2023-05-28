@@ -3,8 +3,10 @@ Type = Package
 Operation = Install
 Operation = Upgrade
 Target = neovim
+Target = vim
 
 [Action]
 Description = Re-pointing /usr/bin/vim symlink to nvim...
 When = PostTransaction
 Exec = /usr/bin/ln -sfT nvim /usr/bin/vim
+Depends = neovim
