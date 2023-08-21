@@ -1,1 +1,6 @@
-KERNEL=="BAT0", SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]", RUN+="/usr/bin/systemctl hibernate -i"
+KERNEL=="BAT0", \
+SUBSYSTEM=="power_supply", \
+ATTR{status}=="Discharging", \
+ATTR{capacity}=="[0-5]", \
+RUN+="/usr/bin/cpupower frequency-set --governor performance", \
+RUN+="/usr/bin/systemctl hibernate -i"

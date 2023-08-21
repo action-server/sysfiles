@@ -1,10 +1,26 @@
-ACTION=="add|change", \
+ACTION=="add", \
+SUBSYSTEM=="module", \
+KERNEL=="acpi_cpufreq|intel_pstate|intel_cpufreq|amd_pstate|amd_pstate_epp|cppc_cpufreq|speedstep_lib|powernow_k8|pcc_cpufreq|p4_clockmod", \
+PROGRAM="/usr/bin/cat /sys/class/power_supply/AC/online", \
+RESULT=="1", \
+RUN+="/usr/bin/cpupower frequency-set --governor performance", \
+RUN+="/usr/bin/light -S 100"
+
+ACTION=="add", \
+SUBSYSTEM=="module", \
+KERNEL=="acpi_cpufreq|intel_pstate|intel_cpufreq|amd_pstate|amd_pstate_epp|cppc_cpufreq|speedstep_lib|powernow_k8|pcc_cpufreq|p4_clockmod", \
+PROGRAM="/usr/bin/cat /sys/class/power_supply/AC/online", \
+RESULT=="0", \
+RUN+="/usr/bin/cpupower frequency-set --governor powersave", \
+RUN+="/usr/bin/light -S 50"
+
+ACTION=="change", \
 SUBSYSTEM=="power_supply", \
 ATTR{online}=="1", \
 RUN+="/usr/bin/cpupower frequency-set --governor performance", \
 RUN+="/usr/bin/light -S 100"
 
-ACTION=="add|change", \
+ACTION=="change", \
 SUBSYSTEM=="power_supply", \
 ATTR{online}=="0", \
 RUN+="/usr/bin/cpupower frequency-set --governor powersave", \
